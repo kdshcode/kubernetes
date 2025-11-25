@@ -1,0 +1,11 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+  # 1. The Brain: Runs the API Server, Scheduler, and Controller Manager
+  - role: control-plane
+  
+  # 2. The Muscle: Where your actual pods/apps will run
+  - role: worker
+  
+  # 3. More Muscle: A second worker to verify multi-node behavior
+  - role: worker

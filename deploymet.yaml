@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment  # <--- The Manager
+metadata:
+  name: my-nginx-deployment # The name of the Manager
+  labels:
+    tier: frontend
+spec:
+  replicas: 4     # <--- The Instruction: "Make sure 4 copies exist"
+  selector:       # <--- The Mapping Logic (The Bridge)
+    matchLabels:
+      app: my-nginx # "I will manage any Pod that has this sticky note"
+  template:       # <--- The Cookie Cutter (The Blueprint)
+    metadata:     # (Inner Metadata for the future Pods)
+      labels:
+        app: my-nginx # <--- The Sticky Note (Must match the Selector above!)
+    spec:         # (Inner Spec for the future Pods)
+      containers:
+      - name: nginx-container
+        image: nginx:latest # <--- The Image
+        ports:
+        - containerPort: 80
